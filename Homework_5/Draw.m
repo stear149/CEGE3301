@@ -25,27 +25,18 @@
 %   11 October 2026
 % 
 %--------------------------------------------------------------------------
-function Draw(x_pos, h_closed, h_itter, h_matrix, channelWidth, ...
-        Q_closed, Q_FD_avg)
+function Draw(x_pos, h_closed, h_iter, h_matrix, channelWidth, Q_closed, Q_FD_avg)
     figure('Name', 'Convergent Channel Seepage Analysis', 'Color', 'w', ...
            'Units', 'normalized', 'Position', [0.2, 0.15, 0.6, 0.7]);
 
-
-    % Subplot 1: Head Profile Comparison h(x)==============================
+    % Subplot 1: Head Profile Comparison h(x)
     subplot(2, 1, 1);
-    x_smooth = linspace(x_pos(1), x_pos(end), 200);
     hold on;
 
-    % Closed Form
-    plot(x_pos, h_closed, 'r-', 'LineWidth', 2, 'DisplayName', ...
-        'Analytical (Closed Form)'); 
-    
-    % Matrix
+    plot(x_pos, h_closed, 'r-', 'LineWidth', 2, 'DisplayName', 'Analytical (Closed Form)'); 
     plot(x_pos, h_matrix, 'bo--', 'LineWidth', 1.2, 'MarkerSize', 6, 'MarkerFaceColor', 'b', 'DisplayName', 'FD (Matrix)');
+    plot(x_pos, h_iter, 'ks:', 'LineWidth', 1.2, 'MarkerSize', 7, 'DisplayName', 'FD (Iterative)');
     
-    % Iterative
-    plot(x_pos, h_itter, 'ks:', 'LineWidth', 1.2, 'MarkerSize', 7, ...
-         'DisplayName', 'FD (Iterative)');
     grid on;
     xlabel('Position along Channel x [m]', 'FontWeight', 'bold');
     ylabel('Hydraulic Head h [m]', 'FontWeight', 'bold');
@@ -54,11 +45,9 @@ function Draw(x_pos, h_closed, h_itter, h_matrix, channelWidth, ...
     xlim([0, x_pos(end)]);
     ylim([min(h_closed) - 0.05, max(h_closed) + 0.05]);
 
-
-    % Subplot 2: Channel Geometry Profile w(x) ============================
+    % Subplot 2: Channel Geometry Profile w(x)
     subplot(2, 1, 2);
 
-    % Symmetric channel boundaries about y = 0
     w_upper = channelWidth / 2;
     w_lower = -channelWidth / 2;
     
@@ -66,11 +55,8 @@ function Draw(x_pos, h_closed, h_itter, h_matrix, channelWidth, ...
     fill([x_pos, fliplr(x_pos)], [w_upper, fliplr(w_lower)], [0.85, 0.92, 0.85], ...
          'EdgeColor', 'none', 'FaceAlpha', 0.6, 'DisplayName', 'Soil Medium'); 
 
-    % Channel Boundaries
     plot(x_pos, w_upper, 'k-', 'LineWidth', 1.5, 'HandleVisibility', 'off');
     plot(x_pos, w_lower, 'k-', 'LineWidth', 1.5, 'HandleVisibility', 'off');
-    
-    % Nodes
     plot(x_pos, zeros(size(x_pos)), 'r.', 'MarkerSize', 12, 'DisplayName', 'FD Nodes');
 
     grid on;
@@ -81,13 +67,12 @@ function Draw(x_pos, h_closed, h_itter, h_matrix, channelWidth, ...
     ylim([-max(channelWidth)*0.7, max(channelWidth)*0.7]);
     legend('Location', 'northeast');
 
-
-    % Discharge Q Comparison
+    % Discharge Q Comparison Summary
     rel_err = abs(Q_FD_avg - Q_closed) / Q_closed * 100;
     
     q_summary = sprintf(['Discharge (Q) Summary:\n' ...
-                         '• Q Theoretical = %.6e m^2/s\n' ...
-                         '• Q Computed FD = %.6e m^2/s\n' ...
+                         '• Q Theoretical = %.6e m^3/s\n' ...
+                         '• Q Computed FD = %.6e m^3/s\n' ...
                          '• Relative Error = %.4f%%'], ...
                          Q_closed, Q_FD_avg, rel_err);
                      
@@ -96,5 +81,4 @@ function Draw(x_pos, h_closed, h_itter, h_matrix, channelWidth, ...
                'EdgeColor', [0.3 0.3 0.3], 'FontSize', 9, 'FontName', 'monospace');
 
     hold off;
-    
 end
