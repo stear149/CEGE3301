@@ -32,8 +32,6 @@ function [h] = Loop(alpha, heads, accuracy)
 
     h_new = h;
 
-    counter = 0;
-
     while running
         for i = 2:N-1
             h_new(1,i) = ((1 + alpha(1,i))*h(1,i-1) + ...
@@ -43,8 +41,5 @@ function [h] = Loop(alpha, heads, accuracy)
         h = h_new;
 
         running = h_dif > accuracy;
-
-        counter = counter +1;
     end
-    disp(counter)
 end
