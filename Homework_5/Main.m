@@ -29,7 +29,7 @@ delta_x = .075;             %[m]
 
 % Self defed Consts
 N = 11;
-accuracy = 10^-6;
+accuracy = 10^-5;
 
 
 % Define Caculated Constants
@@ -58,3 +58,22 @@ Q_FD = -k * w_mid .* (diff(h_matrix) / delta_x);
 Q_FD_avg = mean(Q_FD);
 
 Draw(x_pos, h_closed, h_itter, h_matrix, channelWidth, Q_closed, Q_FD_avg)
+
+% Questions In CMD
+fprintf('---------------------Using Finite Difference---------------------')
+fprintf('\nThe head at each x position was: \n')
+fprintf('x = %.3f, h = %.6f [m]\n', [x_pos; h_matrix]);
+fprintf('\n\n')
+fprintf('------------------------Using Closed-Form------------------------')
+fprintf('\nThe head at each x position was: \n')
+fprintf('x = %.3f, h = %.6f [m]\n', [x_pos; h_closed]);
+fprintf('\n\n')
+fprintf('-----------------The Diffrence Between FD and CF-----------------')
+fprintf('\nThe differnce in head at each x position was: \n')
+fprintf('x = %.3f, difference = %.6e [m]\n', [x_pos; abs(h_matrix - h_closed)]);
+fprintf('\n\n')
+fprintf('---------------------------Discharge Q---------------------------')
+fprintf('\nThe average discharge from finite differences was Q = %.6e m^3/s\n', Q_FD_avg);
+fprintf('The closed-form discharge was Q = %.6e m^3/s\n', Q_closed);
+fprintf('The discharge difference was %.6e m^3/s\n', abs(Q_FD_avg - Q_closed));
+
