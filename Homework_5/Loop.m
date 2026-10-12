@@ -23,7 +23,6 @@
 % 
 %--------------------------------------------------------------------------
 function [h] = Loop(alpha, heads, accuracy)
-    running = true;
     N = numel(alpha);
     h = zeros(1,N);
     
@@ -32,14 +31,14 @@ function [h] = Loop(alpha, heads, accuracy)
 
     h_new = h;
 
-    while running
+    h_dif = Inf;
+
+    while h_dif > accuracy
         for i = 2:N-1
             h_new(1,i) = ((1 + alpha(1,i))*h(1,i-1) + ...
                 (1 - alpha(1,i))*h(1,i+1)) / 2;
         end
         h_dif = max(abs(h_new - h));
         h = h_new;
-
-        running = h_dif > accuracy;
     end
 end
