@@ -1,0 +1,20 @@
+function [h] = Loop(alpha, heads, accuracy)
+    runing = Tru
+    N = numel(alpha);
+    h = zeros(1,N);
+    h_new = zeros(1,N);
+    
+    h(1,1) = heads(1,1);
+    h(1,N) = heads(1,2);
+    
+    while true:
+        for i = 2:N-1
+            h_new(1,i) = 2*h(1,i) - (1 + alpha(1,i))*h(1,i-1) - ...
+            (1 - alpha(1,i))*h(1,i+1);
+        end
+        h_dif = max(abs(h_new - h));
+        if h_dif > accuracy
+            
+        
+    end
+end

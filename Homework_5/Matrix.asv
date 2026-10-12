@@ -1,0 +1,49 @@
+%--------------------------------------------------------------------------
+% Matrix()
+%
+% Arguments:
+%
+% Returns:
+%   Head at Nodes
+%
+% Notes:
+% 
+% Author:
+%   Evan M. Stearns 
+%   University of Minnesota
+%
+% Version:
+%   11 October 2026
+% 
+%--------------------------------------------------------------------------
+function [ans] = Matrix(alpha, heads, accuracy)
+    N = numel(alpha);
+
+    ans = zeros(N,1);
+    
+    ans(1,1) = heads(1,1);
+    ans(N,1) = heads(1,2);
+
+    contm = zeros(N,N);
+    contm(1,1) = 1;
+    contm(N,N) = 1;
+    contm(2:N-1,2:N-1) = 2*eye(N-2);
+    for j = 1:N
+        for i = 2:N-1
+            if i == j+1
+                contm(i,j) = -(1+alpha(i));
+
+            elseif j == i+1
+                contm(i,j) = -(1-alpha(i));
+            end
+        end
+    end
+    
+   while true
+       h_new = contm * ans;
+       if norm(h_new - ans, inf) < accuracy
+           break;
+       end
+       ans = h_new
+   end
+end
