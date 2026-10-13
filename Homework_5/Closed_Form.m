@@ -32,7 +32,7 @@ function [Q, h] = Closed_Form(heads, k, beta, width, l, x_pos)
     h_out = heads(1,2);
 
     Q = ((h_out - h_in) * beta * k) / (log(1-((beta * l) / w_in)));
-    h = h_in + (Q / (beta * k)) * log(1 - (beta .* x_pos ./ w_in));
+    h = h_in + (Q / (beta * k)) * log(1 - ((beta .* x_pos) ./ w_in));
 
 
 end
