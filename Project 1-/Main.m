@@ -44,3 +44,8 @@ head(:, 1) = H_int;
 head(:, end) = H_fin;
 
 head = Matrix(head);
+[Q_exact, Q_calc] = FlowRate(head,k,delta);
+
+disp(head)
+disp(Q_exact)
+disp(Q_calc)
