@@ -40,3 +40,4 @@ H_fin = H_int - delta_h;
 head(:, 1) = H_int;
 head(:, end) = H_fin;
 
+h = Matrix(head);
