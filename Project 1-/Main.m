@@ -23,21 +23,23 @@
 L = 5; % [m]
 H = 3; % [m]
 
-delta_h = 1; % [m]
-delta = 1; % [m]
+delta_x = 1; % [m]
+delta_y = 1; % [m]
+
+delta = [delta_x, delta_y];
 
 k = 0.01; % [cm/s]
 
-xCoordinates = 0:delta:L;
-yCoordinates = 0:delta:H;
+xCoordinates = 0:delta_x:L;
+yCoordinates = 0:delta_y:H;
 [nX, nY] = deal(numel(xCoordinates), numel(yCoordinates));
 head = zeros(nY, nX);
 
 % Dirichlet Bounds (East/West) (Int Conditions)
 H_int = 1;                                  % This could be a user input.
-H_fin = H_int - delta_h;
+H_fin = H_int - delta_y;
 
 head(:, 1) = H_int;
 head(:, end) = H_fin;
 
-h = Matrix(head);
+head = Matrix(head);
