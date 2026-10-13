@@ -16,7 +16,7 @@
 %   University of Minnesota
 %
 % Version:
-%   8 October 2026
+%   12 October 2026
 % 
 %--------------------------------------------------------------------------
 
@@ -33,18 +33,10 @@ yCoordinates = 0:delta:H;
 [nX, nY] = deal(numel(xCoordinates), numel(yCoordinates));
 head = zeros(nY, nX);
 
-% Dirichlet Bounds (East/West)
-H_int = 1;                      % This could be a user input.
+% Dirichlet Bounds (East/West) (Int Conditions)
+H_int = 1;                                  % This could be a user input.
 H_fin = H_int - delta_h;
 
 head(:, 1) = H_int;
 head(:, end) = H_fin;
 
-% K indexing
-h_k = zeros(nX*nY,1);
- for j = 1:nX
-    for i = 1:nY
-        k = (i-1)*(nX) + j;
-        h_k(k,1) = head(i,j);
-    end
- end
