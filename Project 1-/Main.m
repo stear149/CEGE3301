@@ -23,10 +23,11 @@
 L = 5; % [m]
 H = 3; % [m]
 
-delta_x = 1; % [m]
-delta_y = 1; % [m]
+delta_x = 1;    % [m]
+delta_y = 1;    % [m]
+delta_h = 0.5;  % [m]                       % This could be a user input.
 
-delta = [delta_x, delta_y];
+delta = [delta_x, delta_y,delta_h];
 
 k = 0.01; % [cm/s]
 
@@ -37,7 +38,7 @@ head = zeros(nY, nX);
 
 % Dirichlet Bounds (East/West) (Int Conditions)
 H_int = 1;                                  % This could be a user input.
-H_fin = H_int - delta_y;
+H_fin = H_int - delta_h;
 
 head(:, 1) = H_int;
 head(:, end) = H_fin;
