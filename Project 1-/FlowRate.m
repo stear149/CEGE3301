@@ -1,3 +1,27 @@
+%--------------------------------------------------------------------------
+% FlowRate
+%
+% Arguments:
+%   head  - Head distribution at nodes
+%   k     - Hydraulic conductivity [cm/s]
+%   delta - Grid spacing and flow width [m]
+%
+% Returns:
+%   Q_exact - Exact total flow rate
+%   Q_calc  - Calculated total flow rate
+%
+% Notes:
+%   Calculates the exact and numerical flow rates from a head distribution.
+%
+% Author:
+%   Evan M. Stearns 
+%   University of Minnesota
+%
+% Version:
+%   13 October 2026
+% 
+%--------------------------------------------------------------------------
+
 function [Q_exact, Q_calc] = FlowRate(head,k,delta)
     H = (height(head)/delta(1)) - 1;
     L = (width(head)/delta(2)) - 1;

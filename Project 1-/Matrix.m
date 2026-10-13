@@ -1,3 +1,25 @@
+%--------------------------------------------------------------------------
+% Matrix()
+%
+% Arguments:
+%   head - Matrix of prescribed head values
+%
+% Returns:
+%   h - Calculated head distribution at the nodes
+%
+% Notes:
+%   This function constructs and solves the finite-difference matrix system
+%   for the head distribution.
+%
+% Author:
+%   Evan M. Stearns 
+%   University of Minnesota
+%
+% Version:
+%   13 October 2026
+% 
+%--------------------------------------------------------------------------
+
 function [h] = Matrix(head)
     N = numel(head);
     nX = width(head);

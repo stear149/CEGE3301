@@ -1,16 +1,14 @@
 %--------------------------------------------------------------------------
-% Main()
+% Groundwater Head Distribution and Flow Rate
 %
-% Arguments:
-%
-% Returns:
-%   Head at Nodes
-%   Total Flow Assuming k = 0.01 cm/s
+% Calculates and displays the head distribution over a specified area,
+% along with exact and calculated flow rates.
 %
 % Notes:
 %   This function calculates and visualizes the head distribution over 
 %   a specified area.
-% 
+%   Total Flow Assuming k = 0.01 cm/s
+%
 % Author:
 %   Evan M. Stearns 
 %   University of Minnesota
