@@ -107,4 +107,33 @@ function Draw(x_pos, h_closed, h_iter, h_matrix, channelWidth, Q_closed, Q_FD_av
                'FontSize', 9, 'FontName', 'monospace');
 
     hold off;
+
+    
+    % Second Figure: Hydraulic Head Profiles Only
+    figure('Name', 'Hydraulic Head Profile Comparison', 'Color', 'w', ...
+           'Units', 'normalized', 'Position', [0.25, 0.2, 0.55, 0.55]);
+
+    ax3 = axes;
+    hold(ax3, 'on');
+
+    plot(ax3, x_pos, h_closed, '--', 'Color', c_analytical, 'LineWidth', 3.5, ...
+         'DisplayName', 'Analytical (Closed Form)');
+    plot(ax3, x_pos, h_matrix, 'o--', 'Color', c_matrix, 'LineWidth', 1.5, ...
+         'MarkerSize', 5, 'MarkerFaceColor', c_matrix, ...
+         'DisplayName', 'FD (Matrix)');
+    plot(ax3, x_pos, h_iter, 's:', 'Color', c_iterative, 'LineWidth', 1.5, ...
+         'MarkerSize', 9, 'MarkerFaceColor', 'none', ...
+         'DisplayName', 'FD (Iterative)');
+
+    grid(ax3, 'on');
+    set(ax3, 'XColor', 'k', 'YColor', 'k', ...
+        'GridColor', [0.3 0.3 0.3], 'GridAlpha', 0.3, 'LineWidth', 1.1);
+    xlabel(ax3, 'Position along Channel x [m]', 'FontWeight', 'bold', 'Color', 'k');
+    ylabel(ax3, 'Hydraulic Head h [m]', 'FontWeight', 'bold', 'Color', 'k');
+    title(ax3, 'Hydraulic Head Profile h(x) Comparison', ...
+          'FontSize', 12, 'FontWeight', 'bold', 'Color', 'k');
+    legend(ax3, 'Location', 'northeast');
+    xlim(ax3, [0, x_pos(end)]);
+    ylim(ax3, [min(h_closed) - 0.05, max(h_closed) + 0.05]);
+    hold(ax3, 'off');
 end
