@@ -43,6 +43,7 @@ head(:, end) = H_fin;
 
 head = Matrix(head);
 [Q_exact, Q_calc] = FlowRate(head,k,delta);
+h_exact = ComputedHead(L, H, delta, H_int, k, Q_exact);
 
 disp(head)
 disp(Q_exact)
