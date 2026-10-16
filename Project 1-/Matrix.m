@@ -60,8 +60,4 @@ function [h] = Matrix(head)
     h_k = A \ h_k;
     
     h = reshape(h_k, nX, nY)';
-
-
-
-
 end
