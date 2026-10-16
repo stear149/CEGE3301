@@ -46,5 +46,3 @@ head = Matrix(head);
 head_exact = ComputedHead(L, H, delta, H_int, k, Q_exact);
 
 Display(head, head_exact, Q_calc, Q_exact,delta, L)
-
-
