@@ -1,9 +1,16 @@
 %--------------------------------------------------------------------------
-% ComputedHead()
+% ComputedHead(L, H, delta, H_int, k, Q_exact)
 %
 % Arguments:
+%   L       - Total length of the domain [m]
+%   H       - Aquifer thickness [m]
+%   delta   - Spatial step-size vector [m]
+%   H_int   - Initial hydraulic head [m]
+%   k       - Hydraulic conductivity [cm/s]
+%   Q_exact - Exact volumetric flow rate
 %
 % Returns:
+%   h_exact - Hydraulic head at each x-coordinate [m]
 %
 % Notes:
 %   This function solves for the head using a closed-form solution along

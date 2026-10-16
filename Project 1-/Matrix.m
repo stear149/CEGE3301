@@ -1,5 +1,5 @@
 %--------------------------------------------------------------------------
-% Matrix()
+% Matrix(head)
 %
 % Arguments:
 %   head - Matrix of prescribed head values

@@ -1,5 +1,5 @@
 %--------------------------------------------------------------------------
-% FlowRate
+% FlowRate(head,k,delta)
 %
 % Arguments:
 %   head  - Head distribution at nodes

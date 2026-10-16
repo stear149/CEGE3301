@@ -1,3 +1,28 @@
+%--------------------------------------------------------------------------
+% Display(head, h_exact, Q_calc, Q_exact, delta, L)
+%
+% Arguments:
+%   head    - Computed hydraulic head values [m]
+%   h_exact - Exact hydraulic head values [m]
+%   Q_calc  - Computed discharge [m/s]
+%   Q_exact - Exact discharge [m/s]
+%   delta   - Grid spacing vector [m]
+%   L       - Domain length [m]
+%
+% Returns:
+%   None
+%
+% Notes:
+% Displays computed and exact hydraulic head profiles and discharge values.
+%
+% Author:
+%   Evan M. Stearns 
+%   University of Minnesota
+%
+% Version:
+%   16 October 2026
+% 
+%--------------------------------------------------------------------------
 function [] = Display(head, h_exact, Q_calc, Q_exact,delta, L)
 
     x = 0:delta(1):L;
