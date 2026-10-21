@@ -23,7 +23,7 @@ H = 3; % [m]
 
 delta_x = 1;    % [m]
 delta_y = 1;    % [m]
-delta_h = 0.5;  % [m]                       % This could be a user input.
+delta_h = 1;  % [m]                       % This could be a user input.
 
 delta = [delta_x, delta_y,delta_h];
 
