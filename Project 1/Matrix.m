@@ -25,13 +25,15 @@
 %   15 October 2026
 % 
 %--------------------------------------------------------------------------
-function [h] = Matrix(head)
+function [h, totalTime] = Matrix(head, q, name)
+    tStart = tic; % Start overall function timer
+    send(q, struct('Name', name, 'Stage', 'Setting up sub-matrices'));
     N = numel(head);
     nX = width(head);
     nY = height(head);
 
     h_k = reshape(head.', [], 1);
-    
+
     A = spalloc(N, N, 5 * N);
 
     % Set up the main sub matricies 
@@ -56,10 +58,17 @@ function [h] = Matrix(head)
         Flow(i,i) = -2;
     end
     
+    send(q, struct('Name', name, 'Stage', 'Building A Matrix...'));
+
+    tic
     % Build A Matrix
     for i = 1:nY
         r = (i-1)*nX + (1:nX);
         A(r,r) = sparse((i == 1) * Diag_1_1 + (i ~= 1) * Diag);
+
+        if mod(i, max(1, floor(nY/5))) == 0
+            send(q, struct('Name', name, 'Stage', sprintf('Building A Matrix (%d%%)...', round(i/nY*100))));
+        end
     end
 
     for i = 1:nY-1
@@ -69,25 +78,16 @@ function [h] = Matrix(head)
         A(r1,r2) = sparse((i ~= 1) * OffDiag);
         A(r2,r1) = sparse((i == nY-1) * Flow + (i ~= nY-1) * OffDiag);
     end
+    buildTime = toc;
+    send(q, struct('Name', name, 'Stage', sprintf('Built A Matrix (%.2fs)', buildTime)));
 
-    % % Set up an Incomplete LU preconditioner (ILU(0))
-    % setup.type = 'nofill';
-    % [L, U] = ilu(A, setup);
-    % 
-    % % Solve with GMRES: gmres(A, b, restart, tol, maxit, L, U)
-    % restart = 30; % Restarts Arnoldi iteration every 30 steps to control memory
-    % tol = 1e-6;
-    % maxit = 200;
-    % 
-    % [h_k, flag, ~, iter] = gmres(A, h_k, restart, tol, maxit, L, U);
-    % 
-    % if flag ~= 0
-    %     warning('GMRES did not converge (flag %d).', flag);
-    % else
-    %     fprintf('GMRES converged in %d outer iterations (%d inner iterations).\n', iter(1), iter(2));
-    % end
-
+    send(q, struct('Name', name, 'Stage', 'Solving system (A \\ h_k)...'));
+    tic
     h_k = A \ h_k;
+    h = reshape(h_k, nX, nY)'; 
+    SolveTime = toc;
+    send(q, struct('Name', name, 'Stage', sprintf('Complete (Solve: %.2fs)', SolveTime)));
 
-    h = reshape(h_k, nX, nY)';
+    totalTime = toc(tStart); % Calculate total elapsed time
+    send(q, struct('Name', name, 'Stage', sprintf('Complete (Total: %.2fs)', totalTime)));
 end
