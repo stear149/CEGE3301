@@ -23,8 +23,8 @@
 %--------------------------------------------------------------------------
 
 function [Q_exact, Q_calc] = FlowRate(head,k,delta)
-    H = (height(head)/delta(1)) - 1;
-    L = (width(head)/delta(2)) - 1;
+    L = (width(head) - 1) * delta(1);
+    H = (height(head) - 1) * delta(2);   
 
     xCoordinates = 0:delta(1):L;
     yCoordinates = 0:delta(2):H;
