@@ -10,6 +10,6 @@ function [] = Display(q_out,xCoordinates, Q_calc, alpha)
     title('Variation of Specific Discharge');
     hold off;
     
-    fprintf('The Total Flow Rate is %.6g in m^3/s\n',Q_calc);
-    fprintf('The Shape Factor is %.6g\n', alpha);
+    fprintf('The Total Flow Rate Q is %.6g in m^3/s\n',Q_calc);
+    fprintf('The Shape Factor alpha is %.6g\n', alpha);
 end
