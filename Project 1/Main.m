@@ -20,5 +20,6 @@ head(:, 1) = h_west;
 
 head = Matrix(head);
 
-Q_calc = FlowRate(head, k, [delta_x, delta_y]);
+[Q_calc, q_out] = FlowRate(head, k, [delta_x, delta_y]);
 
+[alpha] = ShapeFactor(Q_calc, k, h_north, h_west);

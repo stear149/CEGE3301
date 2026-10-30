@@ -1,4 +1,4 @@
-function [Q_calc] = FlowRate(head,k,delta)
+function [Q_calc, q_out] = FlowRate(head,k,delta)
     L = (width(head) - 1) * delta(1);
     H = (height(head) - 1) * delta(2); 
 
@@ -9,6 +9,8 @@ function [Q_calc] = FlowRate(head,k,delta)
     dh_dx(1,:) = 0;
     q_x = -k .* dh_dx;
     q_y = -k .* dh_dy;
+    
+    q_out = fliplr(q_y(1,:));
 
     Q_calc = trapz(xCoordinates, q_y(1, :));3
 end
