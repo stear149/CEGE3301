@@ -12,5 +12,5 @@ function [Q_calc, q_out] = FlowRate(head,k,delta)
     
     q_out = fliplr(q_y(1,:));
 
-    Q_calc = trapz(xCoordinates, q_y(1, :));3
+    Q_calc = trapz(xCoordinates, q_y(1, :));
 end
