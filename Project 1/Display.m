@@ -2,8 +2,8 @@ function [] = Display(q_out, q_ClosedForm, xCoordinates, Q_calc, Q_ClosedForm, a
 
     figure;
     hold on;
-    plot(xCoordinates,q_out,'o--', 'DisplayName', 'q out in m/s');
-    plot(xCoordinates,q_ClosedForm,'o-', 'DisplayName', 'ClosedForm q out in m/s');
+    plot(xCoordinates,q_out,'o-', 'DisplayName', 'q out in m/s');
+    plot(xCoordinates,q_ClosedForm,'o--', 'DisplayName', 'ClosedForm q out in m/s');
     xlabel('x coordinate');
     ylabel('Velocity (m/s)');
     legend('show');
