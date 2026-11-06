@@ -1,3 +1,21 @@
+%--------------------------------------------------------------------------
+% GroundwaterFlow
+%
+% Description:
+%   Computes the hydraulic head distribution and groundwater flow rates for
+%   a rectangular aquifer using a finite-difference solution.
+%
+% Outputs:
+%   Displays calculated and closed-form flow rates and the shape factor.
+%
+% Author:
+%   Evan M. Stearns 
+%   University of Minnesota
+%
+% Version:
+%   5 November 2026
+% 
+%--------------------------------------------------------------------------
 L = 10;         % [m]
 H = 10;         % [m]
 

@@ -1,3 +1,29 @@
+%--------------------------------------------------------------------------
+% FlowRate(head, k, delta)
+%
+% Arguments:
+%   head  - Hydraulic head matrix [m]
+%   k     - Hydraulic conductivity
+%   delta - Spatial step-size vector [m]
+%
+% Returns:
+%   Q_calc       - Numerically calculated flow rate
+%   Q_ClosedForm - Closed-form flow rate
+%   q_out        - Numerical flow-rate distribution along the boundary
+%   q_ClosedForm - Closed-form flow-rate distribution along the boundary
+%
+% Notes:
+%   This function calculates flow rates using both numerical gradients and
+%   a closed-form solution along the top boundary.
+%
+% Author:
+%   Evan M. Stearns 
+%   University of Minnesota
+%
+% Version:
+%   5 November 2026
+% 
+%--------------------------------------------------------------------------
 function [Q_calc, Q_ClosedForm, q_out, q_ClosedForm] = FlowRate(head,k,delta)
     L = (width(head) - 1) * delta(1);
     H = (height(head) - 1) * delta(2); 
