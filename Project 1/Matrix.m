@@ -7,13 +7,12 @@
 % Returns:
 %   h - Calculated head distribution at the nodes
 %
-% Notes:
-%   This function constructs and solves the finite-difference matrix system
-%   for the head distribution.
+% Description:
+%   Constructs and solves the finite-difference matrix system for the head
+%   distribution, assuming known heads on the west and north boundaries and
+%   flow boundaries on the east and south.
 %
-%   This is built only for a propblem where the west and north are know
-%   heads and the east and south are flow lines.
-%   
+% Notes: 
 %   This is built as a modified version of a similarly named function from
 %   project 1-.
 %
@@ -69,23 +68,6 @@ function [h] = Matrix(head)
         A(r1,r2) = sparse((i ~= 1) * OffDiag);
         A(r2,r1) = sparse((i == nY-1) * Flow + (i ~= nY-1) * OffDiag);
     end
-
-    % % Set up an Incomplete LU preconditioner (ILU(0))
-    % setup.type = 'nofill';
-    % [L, U] = ilu(A, setup);
-    % 
-    % % Solve with GMRES: gmres(A, b, restart, tol, maxit, L, U)
-    % restart = 30; % Restarts Arnoldi iteration every 30 steps to control memory
-    % tol = 1e-6;
-    % maxit = 200;
-    % 
-    % [h_k, flag, ~, iter] = gmres(A, h_k, restart, tol, maxit, L, U);
-    % 
-    % if flag ~= 0
-    %     warning('GMRES did not converge (flag %d).', flag);
-    % else
-    %     fprintf('GMRES converged in %d outer iterations (%d inner iterations).\n', iter(1), iter(2));
-    % end
 
     h_k = A \ h_k;
 
